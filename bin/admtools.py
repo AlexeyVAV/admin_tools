@@ -13,7 +13,9 @@ if __name__ == '__main__':
     s.connect(hostname, port, username, password)
     stdin, stdout, stderr = s.exec_command('hostname -s')
     print stdout.read()
-    stdin, stdout, stderr = s.exec_command('export ORACLE_HOME=/u01/app/oracle/product/12.1.0.2/dbhome_1; export PATH=$PATH:$ORACLE_HOME/bin; srvctl status database -d gbtukts1 2>&1')
+    stdin, stdout, stderr = s.exec_command('export ORACLE_HOME=/u01/app/oracle/product/12.1.0.2/dbhome_1; \
+                                            export PATH=$PATH:$ORACLE_HOME/bin; \
+                                            srvctl status database -d gbtukts1 2>&1')
     #print stdin
     print stdout.read()
     s.close()
