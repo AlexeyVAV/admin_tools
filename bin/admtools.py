@@ -1,10 +1,4 @@
-#import pandas
-#import flask
-#import cx_Oracle
-import sys
 import paramiko
-#
-# from paramiko import SSHClient
 
 hostname = ''
 port = 22

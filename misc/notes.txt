@@ -20,4 +20,4 @@ Traceback (most recent call last):
     server_key)
   File "/usr/local/lib/python2.7/dist-packages/paramiko/client.py", line 672, in m                                                                                    issing_host_key
     raise SSHException('Server %r not found in known_hosts' % hostname)
-paramiko.ssh_exception.SSHException: Server '192.168.100.100' not found in known_hos  
+paramiko.ssh_exception.SSHException: Server '192.168.100.100' not found in known_hos
