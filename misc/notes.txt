@@ -1,0 +1,23 @@
+>>> from paramiko import SSHClient
+>>> from scp import SCPClient
+>>> ssh = SSHClient()
+>>> ssh
+<paramiko.client.SSHClient object at 0x1a41c90>
+>>> ssh.load_system_host_keys()
+>>> ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+>>> ssh.connect('somename@192.168.100.100')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/lib/python2.7/dist-packages/paramiko/client.py", line 296, in c                                                                                    onnect
+    to_try = list(self._families_and_addresses(hostname, port))
+  File "/usr/local/lib/python2.7/dist-packages/paramiko/client.py", line 200, in _                                                                                    families_and_addresses
+    addrinfos = socket.getaddrinfo(hostname, port, socket.AF_UNSPEC, socket.SOCK_S                                                                                    TREAM)
+socket.gaierror: [Errno -2] Name or service not known
+>>> ssh.connect('192.168.100.100')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/lib/python2.7/dist-packages/paramiko/client.py", line 361, in c                                                                                    onnect
+    server_key)
+  File "/usr/local/lib/python2.7/dist-packages/paramiko/client.py", line 672, in m                                                                                    issing_host_key
+    raise SSHException('Server %r not found in known_hosts' % hostname)
+paramiko.ssh_exception.SSHException: Server '192.168.100.100' not found in known_hos  
