@@ -18,6 +18,9 @@ if __name__ == '__main__':
                                             srvctl status database -d gbtukts1 2>&1')
     #print stdin
     print stdout.read()
+    for line in stdout.read():
+        print line.split(' ')
+
     s.close()
 
 
