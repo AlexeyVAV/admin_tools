@@ -1,10 +1,10 @@
 import paramiko
 
 def connection_details():
-    hostname = 'gbwatex2db02'
+    hostname = ''
     port = 22
     username = 'oracle'
-    password = 'EarlWatf0rd#300'
+    password = ''
     return hostname, port, username, password
 
 
