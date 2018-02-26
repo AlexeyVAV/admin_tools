@@ -2,7 +2,7 @@ import paramiko
 
 def connection_details():
     hostname = ''
-    port = 22
+    port = 22á
     username = 'oracle'
     password = ''
     return hostname, port, username, password
