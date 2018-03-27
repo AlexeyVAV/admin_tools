@@ -56,7 +56,7 @@ def main():
             w = ''
             common_list.append(str_list)
             str_list = []
-            print l
+            #print l
             l = ''
 
     s.close()

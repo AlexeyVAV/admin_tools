@@ -11,7 +11,7 @@ class sshConnect:
     def printInfo(self):
         print self.hostname, self.port, self.username, self.password
 
-c1 = sshConnect('gbwatex2db01', 22, 'oracle', 'EarlWatf0rd#300')
+c1 = sshConnect('', 22, '', '')
 
 c1.printInfo()
 
