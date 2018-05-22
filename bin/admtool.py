@@ -78,7 +78,7 @@ ssh.close()
 print common_list
 # print common_list
 
-/*
+##
 import psycopg2
 
 
@@ -117,7 +117,7 @@ class Postgres(object):
         try:
             result = self.cursor.execute(query)
         except Exception as error:
-            print('error execting query "{}", error: {}'.format(query, error))
+            print('error executing query "{}", error: {}'.format(query, error))
             return None
         else:
             return result
@@ -125,4 +125,5 @@ class Postgres(object):
     def __del__(self):
         self.connection.close()
         self.cursor.close()
-*/
+##
+

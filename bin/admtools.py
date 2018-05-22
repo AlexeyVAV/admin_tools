@@ -3,7 +3,7 @@ import paramiko
 def connection_details():
     hostname = ''
     port = 22
-    username = ''
+    username = 'oracle'
     password = ''
     return hostname, port, username, password
 
@@ -11,56 +11,61 @@ def connection_details():
 ## MAIN ##
 def main():
     paramiko.util.log_to_file('../log/paramiko.log')
-
-    s = paramiko.SSHClient()
-    s.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    s.load_system_host_keys()
-
+    ssh_client = paramiko.SSHClient()
+    ssh_connection = ssh_client
+    ssh_connection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh_connection.load_system_host_keys()
     hostname, port, username, password = connection_details()
-    s.connect(hostname, port, username, password)
+    ssh_connection.connect(hostname, port, username, password)
 
-    stdin, stdout, stderr = s.exec_command('hostname -s')
+    stdin, stdout, stderr = ssh_connection.exec_command('hostname -s')
     print stdout.read()
-    stdin, stdout, stderr = s.exec_command('export ORACLE_HOME=/u01/app/oracle/product/12.1.0.2/dbhome_1; \
-                                            export PATH=$PATH:$ORACLE_HOME/bin; \
-                                            srvctl status database -d gbtukts1 2>&1')
+
+    #cmd_line = 'export ORACLE_HOME=/u01/app/oracle/product/12.1.0.2/dbhome_1; \
+    #                                        export PATH=$PATH:$ORACLE_HOME/bin; \
+    #                                        srvctl status database -d gbtukts1 2>&1'
+
+    cmd_line = 'cat /etc/oratab|awk \'{FS=\":\"} {print $1}\''
+
+    stdin, stdout, stderr = ssh_connection.exec_command(cmd_line)
+
     #print stdin
     #print stdout.read()
 
     # split stdin by words
-    #l = ''
+    #inline = ''
     #for line in stdout.read():
     #    #print line
     #    if line != '\n':
-    #        l = l + line
+    #        inline = inline + line
     #    else:
-    #        print l
-    #        l = ''
+    #        print inline
+    #        inline = ''
 
 ### list of words in output
     str_list = []
     common_list = []
-    l = ''
-    w = ''
+    inline = ''
+    inword = ''
     for line in stdout.read():
         #print line
         if line != '\n':
             if line != ' ':
-                w = w + line
+                inword = inword + line
             else:
-                str_list.append(w)
-                w = ''
-            l = l + line
+                str_list.append(inword)
+                inword = ''
+            inline = inline + line
         else:
-            str_list.append(w)
-            w = ''
+            str_list.append(inword)
+            inword = ''
             common_list.append(str_list)
             str_list = []
-            #print l
-            l = ''
+            #print inline
+            inline = ''
 
-    s.close()
-    print common_list
+    ssh_connection.close()
+    print common_list[35:37]
 
 if __name__ == '__main__':
     main()
